@@ -1,33 +1,99 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>متجر النخبة</title><link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>متجر النخبة</title>
+<style>
+:root{--gold:#d4af37;--bg:#0b0d1a;--card:#1f2141;--text:#f0f0f5;--muted:#9a9ab0;--border:rgba(212,175,55,0.2)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:var(--bg);color:var(--text);direction:rtl;padding-bottom:70px}
+header{padding:15px;background:#121429;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+h2{color:var(--gold);font-size:18px;margin:15px 0 10px;padding-right:15px;border-right:3px solid var(--gold)}
+input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:#000;color:#fff;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 15px}
+.card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);cursor:pointer}
+.card img{width:100%;height:150px;object-fit:cover}.info{padding:10px}.info p{font-size:13px;font-weight:bold}.price{color:var(--gold);font-weight:bold;margin:5px 0}
+.btn{width:100%;padding:10px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+nav{position:fixed;bottom:0;width:100%;background:#121429;display:flex;justify-content:space-around;padding:12px;border-top:1px solid var(--border)}
+nav a,nav button{color:var(--muted);text-decoration:none;font-size:12px;background:none;border:none;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:100;padding:20px;overflow-y:auto}
+.modal.open{display:block}.modal-content{background:var(--card);padding:20px;border-radius:15px;max-width:500px;margin:auto;position:relative}
+.close{position:absolute;top:10px;left:10px;background:#333;border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer}
+</style>
 </head>
 <body>
-<header class="app-header">
-  <div class="header-top">
-    <div class="brand"><span class="brand-mark">E</span><div class="brand-text"><span class="brand-name" id="storeName">متجر النخبة</span></div></div>
-    <a href="cart.html" class="cart-icon"><span class="cart-badge" id="cartCount">0</span></a>
-  </div>
-  <div class="search-wrap"><input type="search" id="searchInput" placeholder="ابحث..."></div>
-</header>
-<nav class="categories-nav" id="categoriesNav"></nav>
-<main class="app-main">
-  <section class="banner-section"><div class="banner-slider"><div class="banner-title">تخفيضات كبرى</div><div class="banner-btn">تسوق الآن</div></div></section>
-  <section class="products-section">
-    <header class="section-head"><h2>المنتجات</h2></header>
-    <div class="products-grid" id="productsGrid"></div>
-  </section>
-</main>
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item active">الرئيسية</a>
-  <a href="cart.html" class="nav-item">السلة</a>
-  <button class="nav-item" id="accountBtn">حسابي</button>
-</nav>
-<div class="modal-overlay" id="productModal"><div class="modal-content" id="productModalContent"></div></div>
-<div class="modal-overlay" id="authModal"><div class="modal-content" id="authModalContent"></div></div>
-<div class="toast" id="toast"></div>
-<script src="js/database.js"></script><script src="js/auth.js"></script><script src="js/store.js"></script>
+<header><h2 id="storeName">متجر النخبة</h2><div style="color:var(--gold)">🛒 <span id="cartCount">0</span></div></header>
+<input type="text" id="search" placeholder="ابحث عن منتج..." style="margin:15px;width:calc(100% - 30px)">
+<h2>المنتجات</h2><div class="grid" id="products"></div>
+<nav><a href="#">الرئيسية</a><a href="javascript:alert('السلة قريباً')">السلة</a><button onclick="Auth.open()">حسابي</button></nav>
+
+<div class="modal" id="productModal"><div class="modal-content" id="productContent"></div></div>
+<div class="modal" id="authModal"><div class="modal-content" id="authContent"></div></div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+let storeId = urlParams.get('store') || 'default';
+const DB = {
+  get: (k) => JSON.parse(localStorage.getItem('store_'+storeId+'_'+k)) || [],
+  set: (k,v) => localStorage.setItem('store_'+storeId+'_'+k, JSON.stringify(v)),
+  init() { if(!this.get('products').length) this.set('products', [{id:'p1',name:'سماعات فاخرة',price:349,oldPrice:499,status:'offer',desc:'سماعات بلوتوث 5.3',images:['https://picsum.photos/400/400?1','https://picsum.photos/400/400?2'],video:'https://www.w3schools.com/html/mov_bbb.mp4'}]); }
+};
+DB.init();
+
+const App = {
+  render() {
+    let prods = DB.get('products');
+    document.getElementById('products').innerHTML = prods.map(p => `
+      <div class="card" onclick="App.view('${p.id}')">
+        <img src="${p.images[0]}">
+        <div class="info"><p>${p.name}</p><div class="price">${p.price} ر.س</div>
+        <button class="btn" onclick="event.stopPropagation(); App.add('${p.id}')">أضف</button></div>
+      </div>`).join('');
+    document.getElementById('cartCount').innerText = DB.get('cart').reduce((s,i)=>s+i.qty,0);
+  },
+  add(id) { let c = DB.get('cart'); let item = c.find(i=>i.id===id); if(item) item.qty++; else c.push({id,qty:1}); DB.set('cart',c); this.render(); alert('تمت الإضافة'); },
+  view(id) {
+    let p = DB.get('products').find(x=>x.id===id);
+    document.getElementById('productContent').innerHTML = `
+      <button class="close" onclick="document.getElementById('productModal').classList.remove('open')">✕</button>
+      <img src="${p.images[0]}" style="width:100%;border-radius:10px;margin-bottom:10px;">
+      <div style="display:flex;gap:5px;margin-bottom:10px;">${p.images.map(img=>`<img src="${img}" style="width:50px;height:50px;border-radius:5px;">`).join('')}</div>
+      ${p.video ? `<video controls style="width:100%;border-radius:10px;margin-bottom:10px;"><source src="${p.video}"></video>` : ''}
+      <h3 style="color:var(--gold)">${p.name}</h3><p style="margin:10px 0;color:var(--muted)">${p.desc}</p>
+      <h2 style="color:var(--gold)">${p.price} ر.س</h2>
+      <button class="btn" style="margin-top:15px;" onclick="App.add('${p.id}'); document.getElementById('productModal').classList.remove('open')">أضف للسلة</button>`;
+    document.getElementById('productModal').classList.add('open');
+  }
+};
+
+const Auth = {
+  open() {
+    document.getElementById('authContent').innerHTML = `
+      <button class="close" onclick="document.getElementById('authModal').classList.remove('open')">✕</button>
+      <h3 style="color:var(--gold);margin-bottom:15px;">حسابي</h3>
+      <input type="email" id="email" placeholder="البريد الإلكتروني">
+      <input type="password" id="pass" placeholder="كلمة المرور">
+      <button class="btn" onclick="Auth.login()">دخول</button>
+      <button class="btn" style="margin-top:10px;background:transparent;border:1px solid var(--gold);color:var(--gold)" onclick="Auth.register()">إنشاء حساب</button>`;
+    document.getElementById('authModal').classList.add('open');
+  },
+  login() {
+    let users = DB.get('users'); let e = document.getElementById('email').value; let p = document.getElementById('pass').value;
+    let u = users.find(x=>x.email===e && x.pass===p);
+    if(u && !u.blocked) { alert('مرحباً '+u.name); document.getElementById('authModal').classList.remove('open'); } else { alert('بيانات خاطئة أو محظور'); }
+  },
+  register() {
+    navigator.geolocation.getCurrentPosition(pos => {
+      let name = prompt('الاسم:'); let e = prompt('البريد:'); let p = prompt('كلمة المرور:');
+      if(name && e) { let users = DB.get('users'); users.push({name,email:e,pass:p,location:{lat:pos.coords.latitude,lng:pos.coords.longitude}}); DB.set('users',users); alert('تم التسجيل'); }
+    }, () => alert('يجب السماح بالوصول للموقع'));
+  }
+};
+
+document.getElementById('search').addEventListener('input', e => {
+  let q = e.target.value; let prods = DB.get('products').filter(p => p.name.includes(q));
+  document.getElementById('products').innerHTML = prods.map(p => `<div class="card" onclick="App.view('${p.id}')"><img src="${p.images[0]}"><div class="info"><p>${p.name}</p><div class="price">${p.price}</div></div></div>`).join('');
+});
+
+App.render();
+</script>
 </body>
 </html>
