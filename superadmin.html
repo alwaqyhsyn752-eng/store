@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><meta charset="UTF-8"><title>السوبر أدمن</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/admin.css"></head>
+<body style="padding:20px;">
+<h1 style="color:var(--gold);text-align:center;margin-bottom:20px;">المتاجر المشتركة</h1><div id="storesList"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const list = document.getElementById('storesList'); const stores = new Set();
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k.startsWith('store_settings_v1_')) stores.add(k.replace('store_settings_v1_', '')); }
+  if(!stores.size) return list.innerHTML = '<p style="color:white;text-align:center;">لا توجد متاجر بعد.</p>';
+  list.innerHTML = Array.from(stores).map(id => {
+    const s = JSON.parse(localStorage.getItem('store_settings_v1_'+id));
+    return `<div class="user-card"><div style="color:var(--gold);font-weight:bold;">${s.storeName} (${id})</div>
+    <div style="display:flex;gap:10px;margin-top:10px;"><a href="admin.html?store=${id}" class="btn-primary" style="flex:1;text-align:center;line-height:40px;text-decoration:none;">الإدارة</a>
+    <a href="index.html?store=${id}" class="btn-primary" style="flex:1;text-align:center;line-height:40px;text-decoration:none;background:var(--text-muted);">المتجر</a></div></div>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
