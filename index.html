@@ -2,12 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#101722">
-<title>NOIR | Premium Market</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR | متجر النخبة</title>
 <style>
 :root{--black:#101722;--navy:#1B2938;--gold:#C6A66A;--gold2:#b59559;--ivory:#F1EBDD;--emerald:#527D70;--gray:#A5ABB4;--line:rgba(198,166,106,0.18);--card:rgba(27,41,56,0.55)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -81,98 +77,9 @@ main{padding:0}
 .nav-item.active{color:var(--gold);font-weight:700}
 .nav-item.active svg{transform:translateY(-2px)}
 </style>
-<style>
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);z-index:300;display:none;align-items:flex-end;justify-content:center}
-.modal.open{display:flex}
-.modal-box{background:linear-gradient(180deg,var(--navy) 0%,var(--black) 100%);border-top:1px solid var(--gold);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;padding:22px;animation:slideUp .35s cubic-bezier(.175,.885,.32,1);position:relative}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.close-x{position:sticky;top:0;margin-left:auto;width:36px;height:36px;background:rgba(198,166,106,0.1);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:18px;z-index:10;margin-bottom:8px;transition:all .2s}
-.close-x:hover{background:var(--gold);color:var(--black)}
-.gallery-main{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;margin-bottom:10px;background:var(--black)}
-.gallery-thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px}
-.gallery-thumb{width:58px;height:58px;border-radius:9px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.65;transition:all .2s;flex-shrink:0;background:var(--black)}
-.gallery-thumb.active{border-color:var(--gold);opacity:1}
-.product-title{font-size:19px;font-weight:800;color:var(--ivory);margin-bottom:6px}
-.product-desc{font-size:13px;color:var(--gray);margin-bottom:14px;line-height:1.7}
-.product-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;font-size:11px}
-.product-meta span{padding:5px 10px;background:rgba(198,166,106,0.08);border:1px solid var(--line);border-radius:16px;color:var(--gray)}
-.qty{display:inline-flex;align-items:center;gap:4px;background:rgba(16,23,34,0.6);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:14px}
-.qty button{width:34px;height:34px;border-radius:7px;background:rgba(198,166,106,0.1);color:var(--gold);font-size:16px;font-weight:700}
-.qty button:disabled{opacity:.3;cursor:not-allowed}
-.qty span{min-width:38px;text-align:center;font-weight:800;font-size:15px}
-.btn-full{width:100%;height:48px;background:var(--gold);color:var(--black);border-radius:12px;font-weight:800;font-size:14px;transition:all .25s}
-.btn-full:hover{background:var(--gold2)}
-.btn-full:disabled{opacity:.4;cursor:not-allowed}
-.btn-outline{width:100%;height:46px;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:12px;font-weight:700;font-size:13px;margin-top:8px;transition:all .25s}
-.btn-outline:hover{background:rgba(198,166,106,0.1)}
-.form-group{margin-bottom:14px}
-.form-label{display:block;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px}
-.form-input{width:100%;padding:12px 14px;background:rgba(16,23,34,0.7);border:1px solid var(--line);border-radius:10px;color:var(--ivory);font-size:14px;transition:all .2s}
-.form-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(198,166,106,0.1)}
-textarea.form-input{resize:vertical;min-height:80px}
-select.form-input{cursor:pointer}
-.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:var(--black);padding:12px 22px;border-radius:24px;font-weight:700;font-size:13px;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 10px 30px rgba(0,0,0,0.5);max-width:90vw;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.err{background:#e74c3c;color:#fff}
-.toast.ok{background:var(--emerald);color:#fff}
-.cart-item{display:flex;gap:12px;align-items:center;background:rgba(27,41,56,0.5);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
-.cart-item img{width:68px;height:68px;border-radius:9px;object-fit:cover;flex-shrink:0;background:var(--black)}
-.cart-item-info{flex:1;min-width:0}
-.cart-item-name{font-size:13px;font-weight:700;color:var(--ivory);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
-.cart-item-price{font-size:12px;color:var(--gold);font-weight:700}
-.cart-remove{color:#e74c3c;font-size:11px;font-weight:700;margin-top:4px}
-.cart-total{display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid var(--line);margin:14px 0;font-size:17px;font-weight:800;color:var(--gold)}
-.empty{padding:50px 20px;text-align:center;color:var(--gray)}
-.empty svg{width:60px;height:60px;opacity:.35;margin:0 auto 14px;color:var(--gold)}
-.empty p{font-size:14px;margin-bottom:16px}
-.page{display:none}
-.page.active{display:block}
-.admin-wrap{padding:16px;max-width:900px;margin:0 auto}
-.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
-.admin-title{font-size:20px;font-weight:900;color:var(--gold)}
-.admin-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px}
-.admin-tab{padding:9px 16px;background:rgba(27,41,56,0.6);border:1px solid var(--line);border-radius:10px;color:var(--gray);font-size:12px;font-weight:700;white-space:nowrap;transition:all .2s}
-.admin-tab.active{background:var(--gold);color:var(--black);border-color:var(--gold)}
-.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
-@media(min-width:640px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
-.stat-label{font-size:11px;color:var(--gray);margin-bottom:6px;font-weight:600}
-.stat-val{font-size:22px;font-weight:900;color:var(--gold)}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
-.panel h3{font-size:14px;color:var(--gold);margin-bottom:12px;font-weight:800}
-.row-item{display:flex;gap:10px;align-items:center;background:rgba(16,23,34,0.5);border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px}
-.row-item img{width:48px;height:48px;border-radius:8px;object-fit:cover;background:var(--black)}
-.row-info{flex:1;min-width:0}
-.row-title{font-size:13px;font-weight:700;color:var(--ivory);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row-sub{font-size:11px;color:var(--gray)}
-.btn-sm{padding:7px 12px;border-radius:8px;font-size:11px;font-weight:700;transition:all .2s}
-.btn-edit{background:rgba(198,166,106,0.12);color:var(--gold);border:1px solid var(--gold)}
-.btn-del{background:rgba(231,76,60,0.12);color:#e74c3c;border:1px solid #e74c3c}
-.btn-ok{background:var(--emerald);color:#fff}
-.btn-gold{background:var(--gold);color:var(--black)}
-.img-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.img-preview img{width:56px;height:56px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}
-.editor-grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:640px){.editor-grid{grid-template-columns:1.5fr 1fr}}
-.canvas-wrap{background:var(--black);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;min-height:240px}
-#studioCanvas{max-width:100%;max-height:320px;border-radius:8px}
-.slider-row{margin-bottom:10px}
-.slider-row label{display:flex;justify-content:space-between;font-size:11px;color:var(--gold);font-weight:700;margin-bottom:4px}
-.slider-row input[type=range]{width:100%;accent-color:var(--gold)}
-.bg-picker{display:flex;gap:6px;margin-top:6px}
-.bg-swatch{width:32px;height:32px;border-radius:7px;border:2px solid transparent;cursor:pointer;flex-shrink:0}
-.bg-swatch.active{border-color:var(--gold)}
-.status-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);border-top:1px solid var(--line);padding:14px 16px;transform:translateY(100%);transition:transform .3s;z-index:200}
-.status-bar.show{transform:translateY(0)}
-.status-bar h4{font-size:13px;color:var(--gold);margin-bottom:4px}
-.status-bar p{font-size:11px;color:var(--gray)}
-.lock-wrap{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.lock-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 22px;max-width:380px;width:100%;text-align:center;backdrop-filter:blur(10px)}
-.lock-icon{width:60px;height:60px;background:rgba(198,166,106,0.1);border-radius:16px;display:grid;place-items:center;margin:0 auto 14px;color:var(--gold)}
-.lock-icon svg{width:28px;height:28px}
-</style>
 </head>
 <body>
+
 
 <!-- شريط الحالة العلوي -->
 <div class="status-bar" id="statusBar">
@@ -235,10 +142,7 @@ select.form-input{cursor:pointer}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span>حسابي</span>
     </button>
-    <button class="nav-item" onclick="App.go('admin')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      <span>الإدارة</span>
-    </button>
+    
   </nav>
 </div>
 
@@ -254,20 +158,6 @@ select.form-input{cursor:pointer}
     </div>
   </header>
   <div id="accountContent" style="padding:16px"></div>
-</div>
-
-<!-- ============ صفحة الإدارة ============ -->
-<div class="page" id="pageAdmin">
-  <header class="header">
-    <div class="header-top">
-      <div class="brand">
-        <div class="brand-mark">A</div>
-        <div><span class="brand-name">لوحة الإدارة</span><span class="brand-tag">Admin Panel</span></div>
-      </div>
-      <button class="icon-btn" onclick="App.go('store')">✕</button>
-    </div>
-  </header>
-  <div id="adminContent"></div>
 </div>
 
 <!-- ============ Modal: تفاصيل المنتج ============ -->
@@ -287,7 +177,9 @@ select.form-input{cursor:pointer}
 
 <div class="toast" id="toast"></div>
 
+
 <script>
+
 // ==================== قاعدة البيانات (localStorage) ====================
 const DB = {
   get(k, def) { try { const v = localStorage.getItem('noir_'+k); return v ? JSON.parse(v) : def; } catch(e) { return def; } },
@@ -346,7 +238,7 @@ const App = {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     window.scrollTo(0,0);
     if (page === 'account') Accounts.render();
-    if (page === 'admin') Admin.render();
+    
     if (page === 'store') Store.render();
   },
   closeModal() { $('genericModal').classList.remove('open'); },
@@ -678,234 +570,6 @@ const Accounts = {
 };
 
 // ==================== Admin ====================
-const Admin = {
-  authed: false,
-  tab: 'dashboard',
-
-  render() {
-    if (!this.authed) return this.showLock();
-    this.renderPanel();
-  },
-
-  showLock() {
-    $('adminContent').innerHTML =
-      '<div class="lock-wrap"><div class="lock-box">' +
-      '<div class="lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>' +
-      '<h2 class="product-title" style="text-align:center;margin-bottom:6px">لوحة الإدارة</h2>' +
-      '<p style="text-align:center;color:var(--gray);font-size:12px;margin-bottom:16px">أدخل كلمة المرور للمتابعة (افتراضي: 1234)</p>' +
-      '<div class="form-group"><input class="form-input" type="password" id="adminPass" placeholder="••••"></div>' +
-      '<button class="btn-full" onclick="Admin.unlock()">دخول</button>' +
-      '</div></div>';
-  },
-
-  unlock() {
-    const p = $('adminPass').value;
-    const settings = DB.get('settings', {});
-    if (p === (settings.adminPass || '1234')) {
-      this.authed = true;
-      this.renderPanel();
-    } else toast('كلمة المرور خاطئة', 'err');
-  },
-
-  renderPanel() {
-    const stats = this.getStats();
-    $('adminContent').innerHTML =
-      '<div class="admin-wrap">' +
-      '<div class="admin-head"><h1 class="admin-title">مرحباً</h1><button class="btn-sm btn-gold" onclick="Admin.authed=false;App.go(\'store\')">خروج</button></div>' +
-      '<div class="admin-tabs">' +
-      ['dashboard|📊 الملخص', 'products|📦 المنتجات', 'orders|🛒 الطلبات', 'users|👥 العملاء', 'studio|🎨 AI Studio', 'settings|⚙️ الإعدادات'].map(t => {
-        const [k, l] = t.split('|');
-        return '<button class="admin-tab ' + (this.tab === k ? 'active' : '') + '" onclick="Admin.tab=\'' + k + '\';Admin.renderPanel()">' + l + '</button>';
-      }).join('') +
-      '</div>' +
-      '<div id="adminTabContent"></div>' +
-      '</div>';
-    this.renderTabContent(stats);
-  },
-
-  getStats() {
-    return {
-      products: (DB.get('products',[])||[]).length,
-      orders: (DB.get('orders',[])||[]).length,
-      users: (DB.get('users',[])||[]).length,
-      lowStock: (DB.get('products',[])||[]).filter(p => p.stock > 0 && p.stock <= 5).length,
-      revenue: (DB.get('orders',[])||[]).reduce((s,o) => s + (o.total||0), 0)
-    };
-  },
-
-  renderTabContent(stats) {
-    const c = $('adminTabContent');
-    if (this.tab === 'dashboard') {
-      c.innerHTML =
-        '<div class="stat-grid">' +
-        '<div class="stat"><div class="stat-label">المنتجات</div><div class="stat-val">' + stats.products + '</div></div>' +
-        '<div class="stat"><div class="stat-label">الطلبات</div><div class="stat-val">' + stats.orders + '</div></div>' +
-        '<div class="stat"><div class="stat-label">العملاء</div><div class="stat-val">' + stats.users + '</div></div>' +
-        '<div class="stat"><div class="stat-label">الإيراد</div><div class="stat-val">' + stats.revenue + '</div></div>' +
-        '</div>' +
-        (stats.lowStock ? '<div class="panel" style="border-color:#f59e0b"><h3 style="color:#f59e0b">⚠️ ' + stats.lowStock + ' منتج بمخزون منخفض</h3></div>' : '') +
-        '<div class="panel"><h3>إجراءات سريعة</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-sm btn-gold" onclick="Admin.tab=\'products\';Admin.newProduct()">+ منتج جديد</button><button class="btn-sm btn-edit" onclick="Admin.tab=\'studio\';Admin.renderPanel()">🎨 استوديو AI</button></div></div>';
-    }
-    if (this.tab === 'products') this.renderProductsTab(c);
-    if (this.tab === 'orders') this.renderOrdersTab(c);
-    if (this.tab === 'users') this.renderUsersTab(c);
-    if (this.tab === 'studio') this.renderStudioTab(c);
-    if (this.tab === 'settings') this.renderSettingsTab(c);
-  },
-
-  renderProductsTab(c) {
-    const prods = DB.get('products',[]);
-    c.innerHTML = '<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3 style="margin:0">المنتجات (' + prods.length + ')</h3><button class="btn-sm btn-gold" onclick="Admin.newProduct()">+ إضافة</button></div>' +
-      prods.map(p => '<div class="row-item"><img src="' + ((p.images&&p.images[0])||svgImg(p.name.slice(0,10))) + '"><div class="row-info"><div class="row-title">' + p.name + '</div><div class="row-sub">' + p.price + ' ر.س • مخزون: ' + (p.stock||0) + '</div></div><button class="btn-sm btn-edit" onclick="Admin.editProduct(\'' + p.id + '\')">تعديل</button><button class="btn-sm btn-del" onclick="Admin.delProduct(\'' + p.id + '\')">حذف</button></div>').join('') +
-      '</div>';
-  },
-
-  newProduct() {
-    App.showModal(
-      '<button class="close-x" onclick="App.closeModal()">✕</button>' +
-      '<h2 class="product-title" style="margin-bottom:14px">منتج جديد</h2>' +
-      '<div class="form-group"><label class="form-label">الاسم</label><input class="form-input" id="pfName" placeholder="اسم المنتج"></div>' +
-      '<div class="form-group"><label class="form-label">الوصف</label><textarea class="form-input" id="pfDesc" placeholder="وصف تفصيلي"></textarea></div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="form-group"><label class="form-label">السعر</label><input class="form-input" id="pfPrice" type="number" placeholder="0"></div><div class="form-group"><label class="form-label">السعر القديم</label><input class="form-input" id="pfOld" type="number" placeholder="اختياري"></div></div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="form-group"><label class="form-label">المخزون</label><input class="form-input" id="pfStock" type="number" value="10"></div><div class="form-group"><label class="form-label">القسم</label><select class="form-input" id="pfCat">' + DB.get('categories',[]).filter(x=>x.id!=='all').map(x=>'<option value="'+x.id+'">'+x.name+'</option>').join('') + '</select></div></div>' +
-      '<div class="form-group"><label class="form-label">الحالة</label><select class="form-input" id="pfStatus"><option value="normal">عادي</option><option value="new">جديد</option><option value="offer">عرض</option></select></div>' +
-      '<div class="form-group"><label class="form-label">رابط صورة (اختياري)</label><input class="form-input" id="pfImg" type="url" placeholder="https://..."></div>' +
-      '<div class="form-group"><label class="form-label">رابط فيديو (اختياري)</label><input class="form-input" id="pfVideo" type="url" placeholder="https://...mp4"></div>' +
-      '<button class="btn-full" onclick="Admin.saveProduct()">حفظ المنتج ✓</button>'
-    );
-  },
-
-  editProduct(id) {
-    const p = DB.get('products',[]).find(x => x.id === id);
-    if (!p) return;
-    App.showModal(
-      '<button class="close-x" onclick="App.closeModal()">✕</button>' +
-      '<h2 class="product-title" style="margin-bottom:14px">تعديل: ' + p.name + '</h2>' +
-      '<div class="form-group"><label class="form-label">الاسم</label><input class="form-input" id="pfName" value="' + (p.name||'').replace(/"/g,'&quot;') + '"></div>' +
-      '<div class="form-group"><label class="form-label">الوصف</label><textarea class="form-input" id="pfDesc">' + (p.desc||'') + '</textarea></div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="form-group"><label class="form-label">السعر</label><input class="form-input" id="pfPrice" type="number" value="' + p.price + '"></div><div class="form-group"><label class="form-label">السعر القديم</label><input class="form-input" id="pfOld" type="number" value="' + (p.oldPrice||'') + '"></div></div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="form-group"><label class="form-label">المخزون</label><input class="form-input" id="pfStock" type="number" value="' + (p.stock||0) + '"></div><div class="form-group"><label class="form-label">القسم</label><select class="form-input" id="pfCat">' + DB.get('categories',[]).filter(x=>x.id!=='all').map(x=>'<option value="'+x.id+'" '+(x.id===p.cat?'selected':'')+'>'+x.name+'</option>').join('') + '</select></div></div>' +
-      '<div class="form-group"><label class="form-label">الحالة</label><select class="form-input" id="pfStatus"><option value="normal" '+(p.status==='normal'?'selected':'')+'>عادي</option><option value="new" '+(p.status==='new'?'selected':'')+'>جديد</option><option value="offer" '+(p.status==='offer'?'selected':'')+'>عرض</option></select></div>' +
-      '<div class="form-group"><label class="form-label">صورة</label><input class="form-input" id="pfImg" type="url" value="' + ((p.images&&p.images[0])||'') + '"></div>' +
-      '<div class="form-group"><label class="form-label">فيديو</label><input class="form-input" id="pfVideo" type="url" value="' + (p.video||'') + '"></div>' +
-      '<button class="btn-full" onclick="Admin.saveProduct(\'' + id + '\')">حفظ التعديلات ✓</button>'
-    );
-  },
-
-  saveProduct(id) {
-    const name = $('pfName').value.trim();
-    const desc = $('pfDesc').value.trim();
-    const price = parseFloat($('pfPrice').value) || 0;
-    const oldPrice = parseFloat($('pfOld').value) || null;
-    const stock = parseInt($('pfStock').value) || 0;
-    const cat = $('pfCat').value;
-    const status = $('pfStatus').value;
-    const img = $('pfImg').value.trim();
-    const video = $('pfVideo').value.trim();
-    if (!name || !price) return toast('الاسم والسعر مطلوبان', 'err');
-    const prods = DB.get('products',[]);
-    if (id) {
-      const p = prods.find(x => x.id === id);
-      if (p) {
-        p.name = name; p.desc = desc; p.price = price; p.oldPrice = oldPrice;
-        p.stock = stock; p.cat = cat; p.status = status; p.video = video || null;
-        if (img) p.images = [img];
-      }
-    } else {
-      prods.unshift({
-        id: 'p' + Date.now(), name, desc, price, oldPrice, stock, cat, status,
-        images: [img || svgImg(name.slice(0,10))], video: video || null, rating: 4.5
-      });
-    }
-    DB.set('products', prods);
-    App.closeModal();
-    toast('تم الحفظ ✓', 'ok');
-    this.renderPanel();
-  },
-
-  delProduct(id) {
-    if (!confirm('حذف هذا المنتج؟')) return;
-    DB.set('products', DB.get('products',[]).filter(x => x.id !== id));
-    toast('تم الحذف');
-    this.renderPanel();
-  },
-
-  renderOrdersTab(c) {
-    const orders = DB.get('orders',[]);
-    c.innerHTML = '<div class="panel"><h3>الطلبات (' + orders.length + ')</h3>' +
-      (orders.length ? orders.map(o => '<div class="row-item" style="flex-direction:column;align-items:flex-start;padding:12px"><div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div class="row-title">' + o.id + '</div><select class="form-input" style="width:auto;padding:4px 8px;font-size:11px" onchange="Admin.updateOrderStatus(\'' + o.id + '\',this.value)"><option ' + (o.status==='جديد'?'selected':'') + '>جديد</option><option ' + (o.status==='قيد التجهيز'?'selected':'') + '>قيد التجهيز</option><option ' + (o.status==='مشحون'?'selected':'') + '>مشحون</option><option ' + (o.status==='مكتمل'?'selected':'') + '>مكتمل</option></select></div><div class="row-sub">' + o.user.name + ' • ' + o.user.phone + '</div><div class="row-sub">' + o.items.length + ' منتج • ' + o.total + ' ر.س</div><div class="row-sub" style="color:var(--gold)">' + o.user.address + '</div></div>').join('') : '<p style="color:var(--gray);text-align:center;padding:20px">لا توجد طلبات</p>') + '</div>';
-  },
-
-  updateOrderStatus(id, status) {
-    const orders = DB.get('orders',[]);
-    const o = orders.find(x => x.id === id);
-    if (o) { o.status = status; DB.set('orders', orders); toast('تم التحديث ✓', 'ok'); }
-  },
-
-  renderUsersTab(c) {
-    const users = DB.get('users',[]);
-    c.innerHTML = '<div class="panel"><h3>العملاء (' + users.length + ')</h3>' +
-      (users.length ? users.map(u => '<div class="row-item"><div class="row-info"><div class="row-title">' + u.name + (u.blocked?' <span style="color:#e74c3c;font-size:10px">(محظور)</span>':'') + '</div><div class="row-sub">' + u.email + '</div></div><button class="btn-sm ' + (u.blocked?'btn-ok':'btn-del') + '" onclick="Admin.toggleBlock(\'' + u.id + '\')">' + (u.blocked?'إلغاء':'حظر') + '</button></div>').join('') : '<p style="color:var(--gray);text-align:center;padding:20px">لا يوجد عملاء</p>') + '</div>';
-  },
-
-  toggleBlock(id) {
-    const users = DB.get('users',[]);
-    const u = users.find(x => x.id === id);
-    if (u) { u.blocked = !u.blocked; DB.set('users', users); this.renderPanel(); }
-  },
-
-  renderStudioTab(c) {
-    c.innerHTML = '<div class="panel"><h3>🎨 AI Product Studio — تحرير الصور</h3>' +
-      '<p style="color:var(--gray);font-size:12px;margin-bottom:12px">ارفع صورة منتج، عدلها، احفظها ثم أضف رابطها للمنتج.</p>' +
-      '<div class="form-group"><label class="form-label">رفع صورة</label><input type="file" id="studioUpload" accept="image/*" style="color:var(--ivory)"></div>' +
-      '<div class="editor-grid" id="studioEditor" style="display:none">' +
-      '<div class="canvas-wrap"><canvas id="studioCanvas"></canvas></div>' +
-      '<div>' +
-      '<div class="slider-row"><label><span>السطوع</span><span id="vBright">100%</span></label><input type="range" id="sBright" min="0" max="200" value="100"></div>' +
-      '<div class="slider-row"><label><span>التباين</span><span id="vContrast">100%</span></label><input type="range" id="sContrast" min="0" max="200" value="100"></div>' +
-      '<div class="slider-row"><label><span>التشبع</span><span id="vSat">100%</span></label><input type="range" id="sSat" min="0" max="200" value="100"></div>' +
-      '<div class="slider-row"><label><span>الدوران</span><span id="vRot">0°</span></label><input type="range" id="sRot" min="0" max="360" value="0"></div>' +
-      '<div class="form-group" style="margin-top:10px"><label class="form-label">الخلفية</label><div class="bg-picker">' +
-      '<div class="bg-swatch active" data-bg="#101722" style="background:#101722"></div>' +
-      '<div class="bg-swatch" data-bg="#1B2938" style="background:#1B2938"></div>' +
-      '<div class="bg-swatch" data-bg="#F1EBDD" style="background:#F1EBDD"></div>' +
-      '<div class="bg-swatch" data-bg="#ffffff" style="background:#fff"></div>' +
-      '</div></div>' +
-      '<button class="btn-full" style="margin-top:12px" onclick="Studio.save()">💾 حفظ الصورة</button>' +
-      '</div></div></div>';
-    Studio.init();
-  },
-
-  renderSettingsTab(c) {
-    const s = DB.get('settings', {});
-    c.innerHTML = '<div class="panel"><h3>إعدادات المتجر</h3>' +
-      '<div class="form-group"><label class="form-label">اسم المتجر</label><input class="form-input" id="setName" value="' + (s.storeName||'NOIR') + '"></div>' +
-      '<div class="form-group"><label class="form-label">العملة</label><input class="form-input" id="setCurrency" value="' + (s.currency||'ر.س') + '"></div>' +
-      '<div class="form-group"><label class="form-label">كلمة مرور الإدارة</label><input class="form-input" id="setPass" value="' + (s.adminPass||'1234') + '"></div>' +
-      '<button class="btn-full" onclick="Admin.saveSettings()">حفظ ✓</button></div>' +
-      '<div class="panel" style="border-color:#e74c3c"><h3 style="color:#e74c3c">⚠️ منطقة الخطر</h3>' +
-      '<p style="color:var(--gray);font-size:12px;margin-bottom:10px">حذف جميع البيانات وإعادة تعيين المتجر.</p>' +
-      '<button class="btn-sm btn-del" onclick="Admin.factoryReset()">🗑️ حذف كل شيء</button></div>';
-  },
-
-  saveSettings() {
-    const s = DB.get('settings', {});
-    s.storeName = $('setName').value.trim() || 'NOIR';
-    s.currency = $('setCurrency').value.trim() || 'ر.س';
-    s.adminPass = $('setPass').value || '1234';
-    DB.set('settings', s);
-    toast('تم الحفظ ✓', 'ok');
-    Store.render();
-  },
-
-  factoryReset() {
-    if (!confirm('حذف جميع البيانات نهائياً؟')) return;
-    if (!confirm('تأكيد أخير: لا يمكن التراجع!')) return;
-    Object.keys(localStorage).filter(k => k.startsWith('noir_')).forEach(k => localStorage.removeItem(k));
-    toast('تم الحذف، جاري إعادة التحميل...');
-    setTimeout(() => location.reload(), 1000);
-  }
-};
 
 // ==================== Studio (AI Image Editor) ====================
 const Studio = {
@@ -999,6 +663,7 @@ window.Accounts = Accounts;
 window.Admin = Admin;
 window.Studio = Studio;
 window.DB = DB;
+
 </script>
 </body>
 </html>
