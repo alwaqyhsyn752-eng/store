@@ -1,25 +1,2 @@
-const CartPage = {
-  init() { this.render(); },
-  render() {
-    const cart = DB.getCart(); const container = document.getElementById('cartContainer');
-    if (!cart.length) { container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--text-muted);"><h2>سلتك فارغة</h2><a href="index.html" class="btn-primary" style="display:inline-block;margin-top:20px;width:auto;padding:0 30px;line-height:44px;text-decoration:none;">تسوق الآن</a></div>`; return; }
-    let total = 0;
-    const html = cart.map(item => {
-      const p = DB.getProduct(item.productId); if (!p) return '';
-      total += p.price * item.qty;
-      return `<div class="cart-item"><img src="${p.images[0]}"><div class="cart-item-info"><div style="font-weight:bold;">${p.name}</div><div style="color:var(--gold);">${p.price} ${DB.getSettings().currency}</div>
-      <div style="display:flex;gap:10px;margin-top:10px;align-items:center;"><button onclick="CartPage.update('${p.id}', ${item.qty - 1})" style="background:rgba(255,255,255,0.1);width:30px;height:30px;border-radius:50%;">-</button><span>${item.qty}</span><button onclick="CartPage.update('${p.id}', ${item.qty + 1})" style="background:rgba(255,255,255,0.1);width:30px;height:30px;border-radius:50%;">+</button>
-      <button onclick="CartPage.remove('${p.id}')" style="color:var(--danger);margin-right:auto;font-size:12px;">حذف</button></div></div></div>`;
-    }).join('');
-    container.innerHTML = html + `<div class="cart-total"><span>الإجمالي:</span><span>${total} ${DB.getSettings().currency}</span></div><button class="btn-primary" style="margin-top:20px;" onclick="CartPage.checkout(${total})">إتمام الطلب</button>`;
-  },
-  update(id, qty) { DB.updateCartQty(id, qty); this.render(); },
-  remove(id) { DB.removeFromCart(id); this.render(); },
-  checkout(total) {
-    const user = JSON.parse(localStorage.getItem('current_user'));
-    if (!user) { alert('يجب تسجيل الدخول أولاً لإتمام الطلب'); window.location.href = 'index.html'; return; }
-    DB.addOrder({ user: user.name, phone: user.phone, total: total, items: DB.getCart() });
-    DB.clearCart(); alert('تم إرسال طلبك بنجاح!'); window.location.href = 'index.html';
-  }
-};
+const CartPage = { init() { this.render(); }, render() { const cart = DB.getCart(); const container = document.getElementById('cartContainer'); if (!cart.length) { container.innerHTML = `<div style="text-align:center;padding:50px;"><h2>سلتك فارغة</h2><a href="index.html" class="btn-primary" style="display:inline-block;margin-top:20px;width:auto;padding:0 30px;line-height:44px;text-decoration:none;">تسوق الآن</a></div>`; return; } let total = 0; const html = cart.map(item => { const p = DB.getProduct(item.productId); if (!p) return ''; total += p.price * item.qty; return `<div class="cart-item"><img src="${p.images[0]}"><div style="flex:1;"><div style="font-weight:bold;">${p.name}</div><div style="color:var(--gold);">${p.price}</div><div style="display:flex;gap:10px;margin-top:10px;"><button onclick="CartPage.update('${p.id}', ${item.qty - 1})" style="background:#333;padding:2px 10px;border-radius:5px;">-</button><span>${item.qty}</span><button onclick="CartPage.update('${p.id}', ${item.qty + 1})" style="background:#333;padding:2px 10px;border-radius:5px;">+</button><button onclick="CartPage.remove('${p.id}')" style="color:var(--danger);margin-right:auto;">حذف</button></div></div></div>`; }).join(''); container.innerHTML = html + `<div class="cart-total"><span>الإجمالي:</span><span>${total}</span></div><button class="btn-primary" style="margin-top:20px;" onclick="CartPage.checkout(${total})">إتمام الطلب</button>`; }, update(id, qty) { DB.updateCartQty(id, qty); this.render(); }, remove(id) { DB.removeFromCart(id); this.render(); }, checkout(total) { const user = JSON.parse(localStorage.getItem('current_user')); if (!user) return alert('يجب تسجيل الدخول أولاً'); DB.addOrder({ user: user.name, total: total, items: DB.getCart() }); DB.clearCart(); alert('تم الطلب بنجاح'); window.location.href = 'index.html'; } };
 document.addEventListener('DOMContentLoaded', () => CartPage.init());
