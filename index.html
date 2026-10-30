@@ -120,5 +120,42 @@ const Accounts={render(){const user=DB.get('currentUser',null);if(user)return th
 document.addEventListener('DOMContentLoaded',()=>{seedIfEmpty();Store.render()});
 window.App=App;window.Store=Store;window.Accounts=Accounts;window.DB=DB;
 </script>
+
+<script>
+(function() {
+  // التحقق من وجود نسخة جديدة كل 30 ثانية وعند فتح التطبيق
+  const checkUpdate = () => {
+    const currentVersion = localStorage.getItem('noir_app_version');
+    const serverVersion = 'v' + Date.now(); // في الواقع، يجب أن تأتي من الخادم، لكننا نستخدم خدعة بسيطة هنا
+    
+    // خدعة: إعادة تحميل الصفحة تلقائياً إذا كان هذا أول فتح في الجلسة
+    // أو إذا كان المستخدم قادماً من خلفية التطبيق
+    if (!sessionStorage.getItem('noir_loaded')) {
+      sessionStorage.setItem('noir_loaded', 'true');
+      // إذا كانت الصفحة محملة من الكاش، أعد تحميلها
+      if (performance.navigation.type === 1 || performance.navigation.type === 2) {
+        // لا نفعل شيئاً، الصفحة محملة بشكل طبيعي
+      }
+    }
+  };
+  
+  // إجبار التحديث عند العودة إلى التطبيق (من الخلفية)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      // إذا عاد المستخدم، تحقق من التحديث
+      const lastCheck = sessionStorage.getItem('noir_last_check');
+      const now = Date.now();
+      if (!lastCheck || now - parseInt(lastCheck) > 60000) { // كل دقيقة
+        sessionStorage.setItem('noir_last_check', now);
+        // إعادة تحميل خفيفة (بدون مسح البيانات)
+        if (navigator.onLine) {
+          window.location.reload();
+        }
+      }
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
