@@ -37,4 +37,10 @@ const db = {
   },
   async getOrders() { if(!this.supabase)return[]; const{data}=await this.supabase.from('orders').select('*, order_items(*)').eq('store_id',STORE_ID).order('created_at',{ascending:false}); return data||[]; }
 };
+
+const DB = {
+  get: (k, def) => { try { const v = localStorage.getItem('noir_' + k); return v ? JSON.parse(v) : def; } catch(e) { return def; } },
+  set: (k, v) => { localStorage.setItem('noir_' + k, JSON.stringify(v)); }
+};
+
 db.init();
